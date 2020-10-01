@@ -4,9 +4,11 @@ const app= express();
 const port=3000;
 const mongoose=require('mongoose');
 const bodyParser=require ('body-parser');
+
 //BODY PARSER
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 //MONGOOSE create connection to DB
 const connectionToDB=async()=>{
 try{
