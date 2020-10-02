@@ -1,14 +1,15 @@
 const router=require('express').Router();
 const User=require('../models/User');
+const {registerData,loginData}=require("./validation");
+
 
 router.post("/register",async(req,res)=>{
-    //const {name,email,password}=req.body;
-    let firstUser=new User(
-        {
-        name:req.body.name,
-        email:req.body.email, 
-        password:req.body.password
-    })
+    const {name,email,password}=req.body;
+    let firstUser;
+    //validate data before submitting:
+    const {error}=registerData(req.body);
+    error?res.status(400).send(error.details[0].message):firstUser=new User(
+        {name,email,password})
     try{
         const savedUser=await firstUser.save();
         res.send(savedUser);

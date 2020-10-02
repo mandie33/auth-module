@@ -4,8 +4,8 @@ const userSchema= new Schema ({
 
     name:{
         type:String,
-        minlength:2,
-        maxlength:50,
+        min:6,
+        max:50,
         required:[true]
     },
    
@@ -17,11 +17,12 @@ const userSchema= new Schema ({
    
     password:{
         type:String,
-        minLength:8,
-        maxLength:20,
+        min:6,
+        max:20,
         required: [true, 'mot de passe requis']
         
     },created_at: { type: Date, default: Date.now()  } 
     });
-    const User=mongoose.model("User",userSchema)
-    module.exports=User;
+    
+const User=mongoose.model("User",userSchema)
+module.exports=User;
