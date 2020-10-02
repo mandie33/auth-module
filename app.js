@@ -29,7 +29,7 @@ db.once('open', function() {
 //routes
 
 const authRoute=require('./routes/Auth');
-const { json } = require('body-parser');
+//const { json } = require('body-parser');
 app.use('/api/user',authRoute);
 
 const postsRoute=require('./routes/posts');
