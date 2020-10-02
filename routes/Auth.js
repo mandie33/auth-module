@@ -2,7 +2,7 @@ const router=require('express').Router();
 const User=require('../models/User');
 const {registerData,loginData}=require("./validation");
 const bcrypt=require('bcrypt');
-const jwt=('require jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 
 router.post("/register",async(req,res)=>{
@@ -36,10 +36,15 @@ router.post("/login",async(req,res)=>{
     !existingUser?res.send("email or pwd don't exist"):"";
     //pwd correct?
     let validPwd=bcrypt.compare(req.body.password,existingUser.password );
-    !validPwd?res.send("ooouupps email or pwd don't exist "): res.send("success");
+    !validPwd?res.send("ooouupps email or pwd don't exist "): "";
 
     //create and assign a token
-    
+    const token=jwt.sign(
+        {id:existingUser._id},
+        process.env.TOKEN_SECRET
+    )
+    res.header('auth-token',token).send(token);
+    res.send("success")
 })
 
 module.exports=router;
