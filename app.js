@@ -32,4 +32,7 @@ const authRoute=require('./routes/Auth');
 const { json } = require('body-parser');
 app.use('/api/user',authRoute);
 
+const postsRoute=require('./routes/posts');
+app.use("/api/posts",postsRoute);
+
 app.listen (port,()=>console.log(`server is running on port ${port}`))
